@@ -85,19 +85,19 @@ acs_assisted_income <- get_acs(geography = 'tract',
 # vacancy status:
     # B25002_001: total
     # B25002_003: n
-# acs_vacancy_status <- get_acs(geography = 'tract',
-#                               variables = 'B25002_003',
-#                               summary_var = 'B25002_001',
-#                               endyear = 2015,
-#                               state = states_needed) %>%
-#     group_by(GEOID) %>%
-#     mutate(fraction_vacant_housing = estimate / summary_est) %>%
-#     select(GEOID, fraction_vacant_housing)
+acs_vacancy_status <- get_acs(geography = 'tract',
+                              variables = 'B25002_003',
+                              summary_var = 'B25002_001',
+                              endyear = 2015,
+                              state = states_needed) %>%
+    group_by(GEOID) %>%
+    mutate(fraction_vacant_housing = estimate / summary_est) %>%
+    select(GEOID, fraction_vacant_housing)
 
 ## merge all acs variables in to data
 
 d <- reduce(.x = list(acs_assisted_income, acs_edu, acs_income,
-                      acs_ins, acs_poverty),
+                      acs_ins, acs_poverty, acs_vacancy_status),
             .f = function(.x, .y) left_join(.x, .y, by='GEOID')) %>%
     rename(census_tract_fips = GEOID)
 
