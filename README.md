@@ -13,7 +13,7 @@ Here, we create a deprivation index for each census tract in the United States b
 
 The high resolution of the tract level is masked when using a nationwide scale. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:
 
-![](figs/deprivation_index_map_cincinnati_noframes.jpeg)
+![](figs/deprivation_index_map_cincinnati.jpeg)
 
 The data is in a CSV file (`ACS_deprivation_index_by_census_tracts.csv`) which is a table of 73,056 census tracts listed by their FIPS ID and corresponding deprivation index.  Also included for each tract are the six individual ACS measures used to create the deprivation index.
 
