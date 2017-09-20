@@ -41,9 +41,9 @@ acs_income <- get_acs(geography = 'tract',
 ## fraction_high_school_edu
 # population 25 and older with edu attainment of at least high school graduate (includes GED equivalency)
     # B15003_001: total
-    # B15003_{018 - 025}: n
+    # B15003_{017 - 025}: n
 acs_edu <- get_acs(geography = 'tract',
-                       variables = paste0('B15003_0',18:25),
+                       variables = paste0('B15003_0',17:25),
                        summary_var = 'B15003_001',
                        endyear = 2015,
                        state = states_needed) %>%
