@@ -96,7 +96,7 @@ save_pdf('figs/dep_index_density.pdf', width=10, height = 5, jpg=TRUE)
 # merge in and save
 d <- left_join(d, dep_index, by='census_tract_fips')
 saveRDS(d, 'ACS_deprivation_index_by_census_tracts.rds')
-saveRDS(d, 'ACS_deprivation_index_by_census_tracts.csv')
+rio::export(d, 'ACS_deprivation_index_by_census_tracts.csv')
 
 ## save as shapefile
 us_tracts <- read_sf('../us_tract_2015', 'US_tract_2015')
