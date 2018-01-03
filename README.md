@@ -3,6 +3,9 @@
 **Cole Brokamp**  
 cole.brokamp@cchmc.org
 
+[![DOI](https://zenodo.org/badge/101339644.svg)](https://zenodo.org/badge/latestdoi/101339644)
+ [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+
 ## Overview
 
 Socioeconomic variables from the American Community Survey (ACS) are frequently used in place of or in addition to individual confounders in observational studies. There are several census tract level measures that can be used to capture "community deprivation" and they are often highly correlated, e.g., median household income and educational attainment. Choosing only one ACS measure might not capture the entirety of community deprivation, but using more than one ACS measure can lead to problems in statistical models due to colinearity. 
