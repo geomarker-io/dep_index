@@ -53,6 +53,18 @@ We can verify the relationship between the deprivation index and each of the ACS
 
 ![](figs/dep_index_and_acs_measures_xyplots.jpg)
 
+## Import Directly Into `R`
+
+Use the following code to download the deprivation index dataframe directly into R:
+
+```
+dep_index <- 'https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds' %>% 
+    url() %>% 
+    gzcon() %>% 
+    readRDS() %>% 
+    as_tibble()
+```
+
 ## Reproducibility
 
 `01_make_data_for_dep_index.R` is used to fetch the ACS census tract level data and then `02_pca_on_dep_index_data.R` is used to carry out the principal components analysis, create the deprivation index, and create the images used in this document.
