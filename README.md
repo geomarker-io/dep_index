@@ -20,6 +20,12 @@ The high resolution of the tract level is masked when using a nationwide scale. 
 
 The data is in a CSV file (`ACS_deprivation_index_by_census_tracts.csv`) which is a table of 73,056 census tracts listed by their FIPS ID and corresponding deprivation index.  Also included for each tract are the six individual ACS measures used to create the deprivation index.
 
+## Citation for Scientific Publications
+
+If you use the deprivation index in a scientific publication, please cite our manuscript detailing its creation and application to health outcomes:
+
+> Cole Brokamp, Andrew F. Beck, Neera K. Goyal, Patrick Ryan, James M. Greenberg, Eric S. Hall. Material Community Deprivation and Hospital Utilization During the First Year of Life: An Urban Population-Based Cohort Study. *Annals of Epidemiology*. 30. 37-43. 2019. [Download](https://colebrokamp-website.s3.amazonaws.com/publications/Brokamp_AoE_2019.pdf).
+
 ## Details on Creating the Index
 
 The following census tract level variables were derived from the 2015 5-year American Community Survey:
