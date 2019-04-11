@@ -36,39 +36,3 @@ d<- d %>%
 
 
 
-
-###############
-#Newyork 
-d<- data_combined %>%
-  filter(STATE == 36) %>%
-  dplyr :: select (ZCTA5,dep_index)
-  #filter(dep_index != 'NA' )
-
-# keep only those that could be geocoded
-d <- filter(d, !is.na(dep_index))
-
-write.csv(d, file= 'ZCTA_dep_together_newyork.csv')
-
-##donor data
-#NY<- read.csv('C:\\Users\\BHUD9C\\Desktop\\DATA_SHARAD\\New York\\Donors.csv')
-NY<- read.csv('C:\\Users\\Nobel\\Desktop\\New_York.csv')
-NY$STATE <- as.character(NY$STATE)
-NY<- NY %>% 
-  filter (STATE == 'NY') %>%
-  dplyr::select(ZIP,SEX,DONOR)
-
-NY <- NY %>%
-  group_by(ZIP) %>%
-  summarise(number_of_donor = sum(DONOR == 'Y'),
-            total = n()) %>%
-  mutate(organ_donor_rate = number_of_donor / total)
-
-write.csv(NY, file= 'NewYork_donor.csv')
-
-############### read new york donor data and combine with zcta and 
-NY$ZIP <- as.character(NY$ZIP)
-NY <- dplyr::left_join(NY,d, by= c("ZIP" = "ZCTA5"))
-
-
-
-
