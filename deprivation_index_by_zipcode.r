@@ -8,12 +8,8 @@ ZCTA_data<- ZCTA_data %>%
   dplyr::select(ZCTA5, STATE,GEOID) %>%
   filter (STATE %in% c(1:56)) # remove the islands
 
-# Download deprivation index
-dep_index <- 'https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds' %>% 
-  url() %>% 
-  gzcon() %>% 
-  readRDS() %>% 
-  as_tibble()
+# read deprivation index
+dep_index <- readRDS(gzcon(url('https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds'))) 
 
 dep_index <- dep_index %>% 
   dplyr::select(dep_index,census_tract_fips)
@@ -24,15 +20,12 @@ dep_index$GEOID <- as.character(dep_index$census_tract_fips)
 d <- dplyr::left_join(ZCTA_data,dep_index, by= 'GEOID')
 
 # remove missing deprivation index
-d <- filter(d, !is.na(dep_index))
+#d <- filter(d, !is.na(dep_index))
 
 # Deprivation index by Zip code
 d<- d %>%
   group_by(ZCTA5) %>%
-  summarize(dep_index = mean(dep_index))
+  summarize(dep_index = mean(dep_index, na.rm = TRUE))
 
-
-  
-
-
-
+write.csv(d, file= 'ACS_deprivation_index_by_zipcode.csv')
+saveRDS(d, "ACS_deprivation_index_by_zipcode.rds")
