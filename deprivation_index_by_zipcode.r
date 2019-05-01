@@ -1,31 +1,25 @@
 library(tidyverse)
 
+# read deprivation index
+library(tidyverse)
+
+# Deprivation index
+dep_index <- readRDS(gzcon(url('https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds'))) 
+
+
+# ZCTA data 
 ZCTA_data<- read.table("https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_tract_rel_10.txt", header = TRUE,sep = ',',
                        colClasses = c('ZCTA5' = 'character' , 'GEOID' = 'character'))
 
-#select the variables 
-ZCTA_data<- ZCTA_data %>%
-  dplyr::select(ZCTA5, STATE,GEOID) %>%
-  filter (STATE %in% c(1:56)) # remove the islands
-
-# read deprivation index
-dep_index <- readRDS(gzcon(url('https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds'))) 
-
-dep_index <- dep_index %>% 
-  dplyr::select(dep_index,census_tract_fips)
-
-dep_index$GEOID <- as.character(dep_index$census_tract_fips)
 
 # combine two data 
-d <- dplyr::left_join(ZCTA_data,dep_index, by= 'GEOID')
+ZCTA_data <- dplyr::left_join(dep_index,ZCTA_data, by= c('census_tract_fips' = 'GEOID'))
 
-# remove missing deprivation index
-#d <- filter(d, !is.na(dep_index))
 
 # Deprivation index by Zip code
-d<- d %>%
+ZCTA_data<- ZCTA_data %>%
   group_by(ZCTA5) %>%
-  summarize(dep_index = mean(dep_index, na.rm = TRUE))
+  summarize_if(is.numeric, mean, na.rm= TRUE)
 
-write.csv(d, file= 'ACS_deprivation_index_by_zipcode.csv')
-saveRDS(d, "ACS_deprivation_index_by_zipcode.rds")
+write.csv(ZCTA_data, file= 'ACS_deprivation_index_by_zipcode.csv', row.names = FALSE)
+saveRDS(ZCTA_data, "ACS_deprivation_index_by_zipcode.rds")
