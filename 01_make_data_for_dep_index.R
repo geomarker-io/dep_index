@@ -23,7 +23,7 @@ states_needed <- tigris::fips_codes %>%
 acs_poverty <- get_acs(geography = 'tract',
                        variables = 'B17001_002',
                        summary_var = 'B17001_001',
-                       endyear = 2015,
+                       year = 2017,
                        state = states_needed) %>%
     mutate(fraction_poverty = estimate / summary_est) %>%
     select(GEOID, fraction_poverty)
@@ -33,7 +33,7 @@ acs_poverty <- get_acs(geography = 'tract',
     # B19013_001: est
 acs_income <- get_acs(geography = 'tract',
                       variables = 'B19013_001',
-                      endyear = 2015,
+                      year = 2017,
                       state = states_needed) %>%
     mutate(median_income = estimate) %>%
     select(GEOID, median_income)
@@ -45,7 +45,7 @@ acs_income <- get_acs(geography = 'tract',
 acs_edu <- get_acs(geography = 'tract',
                        variables = paste0('B15003_0',17:25),
                        summary_var = 'B15003_001',
-                       endyear = 2015,
+                       year = 2017,
                        state = states_needed) %>%
     group_by(GEOID) %>%
     summarize(high_school_edu = sum(estimate),
@@ -60,7 +60,7 @@ acs_edu <- get_acs(geography = 'tract',
 acs_ins <- get_acs(geography = 'tract',
                        variables = paste0('B27010_0',c(17, 33, 50, 66)),
                        summary_var = 'B27010_001',
-                       endyear = 2015,
+                       year = 2017,
                        state = states_needed) %>%
     group_by(GEOID) %>%
     summarize(no_health_ins = sum(estimate),
@@ -75,7 +75,7 @@ acs_ins <- get_acs(geography = 'tract',
 acs_assisted_income <- get_acs(geography = 'tract',
                                variables = 'B19058_002',
                                summary_var = 'B19058_001',
-                               endyear = 2015,
+                               year = 2017,
                                state = states_needed) %>%
     group_by(GEOID) %>%
     mutate(fraction_assisted_income = estimate / summary_est) %>%
@@ -88,7 +88,7 @@ acs_assisted_income <- get_acs(geography = 'tract',
 acs_vacancy_status <- get_acs(geography = 'tract',
                               variables = 'B25002_003',
                               summary_var = 'B25002_001',
-                              endyear = 2015,
+                              year = 2017,
                               state = states_needed) %>%
     group_by(GEOID) %>%
     mutate(fraction_vacant_housing = estimate / summary_est) %>%
@@ -101,4 +101,4 @@ d <- reduce(.x = list(acs_assisted_income, acs_edu, acs_income,
             .f = function(.x, .y) left_join(.x, .y, by='GEOID')) %>%
     rename(census_tract_fips = GEOID)
 
-saveRDS(d, 'data_for_dep_index.rds')
+saveRDS(d, 'data_for_dep_index_5yr_2017.rds')
