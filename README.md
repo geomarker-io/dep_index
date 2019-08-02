@@ -30,7 +30,7 @@ If you use the deprivation index in a scientific publication, please cite our ma
 
 The following census tract level variables were derived from the 2015 5-year American Community Survey:
 
-- `fraction_poverty`: fraction of households with income in past 12 months below poverty level
+- `fraction_poverty`: fraction of population with income in past 12 months below poverty level
 - `median_income`: median household income in the past 12 months in 2015 inflation-adjusted dollars
 - `fraction_high_school_edu`: fraction of population 25 and older with educational attainment of at least high school graduation (includes GED equivalency)
 - `fraction_no_health_ins`: fraction of poulation with no health insurance coverage
