@@ -71,6 +71,11 @@ dep_index <- 'https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivati
     as_tibble()
 ```
 
+We also calculated a nationwide average by weighting each tract-level deprivation index by its population under age 18. 
+
+Mean = 0.37
+SE = 0.0006
+
 ## ZIP Code Deprivation Index
 
 The deprivation index is also available by zip codes, denoted using the [ZIP Code Tabulation Area (ZCTA)](https://en.wikipedia.org/wiki/ZIP_Code_Tabulation_Area) boundaries. The value for each ZCTA is calculated as the mean of all of its intersecting census tracts. Download the file called `ACS_deprivation_index_by_census_tracts.csv` or use the above code to read it into R by replacing the RDS file name with `ACS_deprivation_index_by_census_tracts.rds`.
