@@ -9,7 +9,8 @@ library(GGally)
 
 d %>% ungroup() %>% select(-census_tract_fips) %>%
     ggpairs(lower = list(continuous = wrap('points', alpha=0.1)))
-CB::save_pdf('./2018_dep_index/figs/acs_data_pairs_plot.pdf', width=12, height=12, jpg=TRUE)
+ggsave('./2018_dep_index/figs/acs_data_pairs_plot.jpg', width=12, height=12)
+# CB::save_pdf('./2018_dep_index/figs/acs_data_pairs_plot.pdf', width=12, height=12, jpg=TRUE)
 
 
 # # Hamilton county only
@@ -51,7 +52,8 @@ summary(d_pca)$importance %>%
     labs(title = 'Variance of ACS Measures Expained by Deprivation Indices') +
     theme(legend.title=element_blank()) +
     xlab('index') + ylab('variance')
-CB::save_pdf('./2018_dep_index/figs/variance_of_acs_explained_by_dep_index.pdf', width=10, height=4, jpg=TRUE)
+ggsave('./2018_dep_index/figs/variance_of_acs_explained_by_dep_index.jpg', width=10, height=4)
+# CB::save_pdf('./2018_dep_index/figs/variance_of_acs_explained_by_dep_index.pdf', width=10, height=4, jpg=TRUE)
 
 # DO NOT inverse sign all weights so higher PC1 means more deprivation
 dep_weights <- d_pca$rotation %>%
@@ -67,13 +69,15 @@ dep_weights %>%
     facet_wrap(~ component) +
     labs(title='Weights of ACS Measure on Deprivation Indices') +
     xlab(' ')
-CB::save_pdf('./2018_dep_index/figs/acs_measure_weights_on_dep_index.pdf', width=10, height=6, jpg=TRUE)
+ggsave('./2018_dep_index/figs/acs_measure_weights_on_dep_index.jpg', width=10, height=6)
+# CB::save_pdf('./2018_dep_index/figs/acs_measure_weights_on_dep_index.pdf', width=10, height=6, jpg=TRUE)
 
 # visualize transformed indices for the census tracts
 d_pca$x %>%
     as_tibble() %>%
     ggpairs(lower = list(continuous = wrap('points', alpha=0.3)))
-CB::save_pdf('./2018_dep_index/figs/PCs_pairs_plot.pdf', width=12, height=12, jpg=TRUE)
+ggsave('./2018_dep_index/figs/PCs_pairs_plot.jpg', width=12, height=12)
+# CB::save_pdf('./2018_dep_index/figs/PCs_pairs_plot.pdf', width=12, height=12, jpg=TRUE)
 
 # take the first pc and norm to [0,1]
 # DO NOT reverse magnitude so higher value means higher deprivation
@@ -89,7 +93,8 @@ dep_index %>%
     geom_density(fill='lightgrey') +
     labs(title='Distribution of Deprivation Index for All US Census Tracts') +
     xlab('deprivation index')
-CB::save_pdf('./2018_dep_index/figs/dep_index_density.pdf', width=10, height = 5, jpg=TRUE)
+ggsave('./2018_dep_index/figs/dep_index_density.jpg', width=10, height = 5)
+# CB::save_pdf('./2018_dep_index/figs/dep_index_density.pdf', width=10, height = 5, jpg=TRUE)
 
 # merge in and save
 d <- left_join(d, dep_index, by='census_tract_fips')
@@ -121,5 +126,6 @@ d %>%
     facet_wrap(~ measure, scales='free') +
     labs(title = 'Relationship of Deprivation Index with ACS Measures') +
     xlab('deprivation index') + ylab('')
-CB::save_pdf('./2018_dep_index/figs/dep_index_and_acs_measures_xyplots.pdf', width=12, height=7, jpg=TRUE)
+ggsave('./2018_dep_index/figs/dep_index_and_acs_measures_xyplots.jpg', width=12, height=7)
+# CB::save_pdf('./2018_dep_index/figs/dep_index_and_acs_measures_xyplots.pdf', width=12, height=7, jpg=TRUE)
 
