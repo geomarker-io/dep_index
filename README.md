@@ -1,10 +1,14 @@
 # A Nationwide Community Deprivation Index
 
-**Cole Brokamp**  
-cole.brokamp@cchmc.org
-
-[![DOI](https://zenodo.org/badge/101339644.svg)](https://zenodo.org/badge/latestdoi/101339644)
  [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+
+**Citation for Scientific Publications:**  If you use the deprivation index in a scientific publication, please cite our manuscript detailing its creation and application to health outcomes:
+
+> Cole Brokamp, Andrew F. Beck, Neera K. Goyal, Patrick Ryan, James M. Greenberg, Eric S. Hall. Material Community Deprivation and Hospital Utilization During the First Year of Life: An Urban Population-Based Cohort Study. *Annals of Epidemiology*. 30. 37-43. 2019. [Download](https://colebrokamp-website.s3.amazonaws.com/publications/Brokamp_AoE_2019.pdf).
+
+**2018 Update:**  The [2018_dep_index](/2018_dep_index) folder contains an version of the same deprivation index, but updated with data from the 2018 5-yr American Community Survey data.  See the [2018 README](/2018_dep_index/README.md) for details on getting and using the data at the census tract and ZIP code level.
+
+--------------------------------------------
 
 ## Overview
 
@@ -18,13 +22,27 @@ The high resolution of the tract level is masked when using a nationwide scale. 
 
 ![](figs/deprivation_index_map_cincinnati.jpeg)
 
-The data is in a CSV file (`ACS_deprivation_index_by_census_tracts.csv`) which is a table of 73,056 census tracts listed by their FIPS ID and corresponding deprivation index.  Also included for each tract are the six individual ACS measures used to create the deprivation index.
+## Getting the data
 
-## Citation for Scientific Publications
+### Download the CSV file
 
-If you use the deprivation index in a scientific publication, please cite our manuscript detailing its creation and application to health outcomes:
+The data is contained in a CSV file called [ACS_deprivation_index_by_census_tracts.csv](https://github.com/geomarker-io/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.csv) which is a table of 73,056 census tracts listed by their FIPS ID and corresponding deprivation index.  Also included for each tract are the six individual ACS measures used to create the deprivation index.
 
-> Cole Brokamp, Andrew F. Beck, Neera K. Goyal, Patrick Ryan, James M. Greenberg, Eric S. Hall. Material Community Deprivation and Hospital Utilization During the First Year of Life: An Urban Population-Based Cohort Study. *Annals of Epidemiology*. 30. 37-43. 2019. [Download](https://colebrokamp-website.s3.amazonaws.com/publications/Brokamp_AoE_2019.pdf).
+### Import Directly Into `R`
+
+Use the following code to download the deprivation index data.frame directly into R:
+
+```
+dep_index <- 'https://github.com/geomarker-io/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds' %>% 
+    url() %>% 
+    gzcon() %>% 
+    readRDS() %>% 
+    as_tibble()
+```
+
+### ZIP Code Deprivation Index
+
+The deprivation index is also available by zip codes, denoted using the [ZIP Code Tabulation Area (ZCTA)](https://en.wikipedia.org/wiki/ZIP_Code_Tabulation_Area) boundaries. The value for each ZCTA is calculated as the mean of all of its intersecting census tracts. Download the file called `ACS_deprivation_index_by_zipcode.csv` or use the above code to read it into R by replacing the RDS file name with `ACS_deprivation_index_by_zipcode.rds`.
 
 ## Details on Creating the Index
 
@@ -55,30 +73,11 @@ Applying the weights to the data for all census tracts leads to a deprivation in
 
 ![](figs/dep_index_density.jpg)
 
+We calculated the nationwide mean (0.37) and standard error (0.0006) for the deprivation index by weighting each tract-level deprivation index by its population under age 18. Details are in the [weighted_avg/dep_index_pop_under_18_weighted_avg.R](weighted_avg/dep_index_pop_under_18_weighted_avg.R) file.
+
 We can verify the relationship between the deprivation index and each of the ACS measures individually with scatter plots:
 
 ![](figs/dep_index_and_acs_measures_xyplots.jpg)
-
-## Import Directly Into `R`
-
-Use the following code to download the deprivation index dataframe directly into R:
-
-```
-dep_index <- 'https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds' %>% 
-    url() %>% 
-    gzcon() %>% 
-    readRDS() %>% 
-    as_tibble()
-```
-
-We also calculated a nationwide average by weighting each tract-level deprivation index by its population under age 18. 
-
-Mean = 0.37
-SE = 0.0006
-
-## ZIP Code Deprivation Index
-
-The deprivation index is also available by zip codes, denoted using the [ZIP Code Tabulation Area (ZCTA)](https://en.wikipedia.org/wiki/ZIP_Code_Tabulation_Area) boundaries. The value for each ZCTA is calculated as the mean of all of its intersecting census tracts. Download the file called `ACS_deprivation_index_by_census_tracts.csv` or use the above code to read it into R by replacing the RDS file name with `ACS_deprivation_index_by_census_tracts.rds`.
 
 ## Reproducibility
 
