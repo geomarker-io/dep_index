@@ -9,14 +9,14 @@ states <- tigris::states(cb = TRUE) %>%
 tract_pop_under_18 <- tidycensus::get_acs(geography = 'tract',
                                           variables = c(paste0('B01001_00', 1:6), paste0('B01001_0', 27:30)),
                                           state = states$NAME,
-                                          year = 2015) %>%
+                                          year = 2018) %>%
   group_by(GEOID) %>%
   summarize(pop_under_18 = sum(estimate))
 
-dep_index <- 'https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds' %>%
-  url() %>%
-  gzcon() %>%
-  readRDS() %>%
+dep_index <- 'https://github.com/geomarker-io/dep_index/raw/master/2018_dep_index/ACS_deprivation_index_by_census_tracts.rds' %>% 
+  url() %>% 
+  gzcon() %>% 
+  readRDS() %>% 
   as_tibble()
 
 dep_index <- dep_index %>%
