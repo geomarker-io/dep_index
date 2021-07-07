@@ -75,6 +75,15 @@ Applying the weights to the data for all census tracts leads to a deprivation in
 
 We calculated the nationwide mean (0.37) and standard error (0.0006) for the deprivation index by weighting each tract-level deprivation index by its population under age 18. Details are in the [weighted_avg/dep_index_pop_under_18_weighted_avg.R](weighted_avg/dep_index_pop_under_18_weighted_avg.R) file.
 
+| Measure         | 2015 Deprivation Index     | 2018 Deprivation Index   |
+| :--------       | -----: | -----------: |
+| Mean            | 0.37   |  0.35   |
+| Standard Error  | 0.0006 |  0.0006 |
+| 25th percentile | 0.27   |  0.25   |
+| Median          | 0.36   |  0.33   |
+| 75th percentile | 0.46   |  0.43   |
+
+
 We can verify the relationship between the deprivation index and each of the ACS measures individually with scatter plots:
 
 ![](figs/dep_index_and_acs_measures_xyplots.jpg)
