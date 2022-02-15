@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use the deprivation index, please cite it as below."
+authors:
+- family-names: "Brokamp"
+  given-names: "Cole"
+title: "Material Deprivation Index"
+version: 0.3
+date-released: 2020-08-05
+url: "https://geomarker.io/dep_index"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Brokamp"
+    given-names: "Cole"
+  - family-names: "Beck"
+    given-names: "Andrew F."
+  - family-names: "Goyal"
+    given-names: "Neera K."
+  - family-names: "Ryan"
+    given-names: "Patrick"
+  - family-names: "Greenberg"
+    given-names: "James M."
+  - family-names: "Hall"
+    given-names: "Eric S."
+  doi: "https://doi.org/10.1016/j.annepidem.2018.11.008"
+  journal: "Annals of Epidemiology"
+  start: 37 # First page number
+  end: 43 # Last page number
+  title: "Material Community Deprivation and Hospital Utilization During the First Year of Life: An Urban Population-Based Cohort Study"
+  issue: 30
+  year: 2019
