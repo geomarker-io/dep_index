@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>README.knit</title>
+
+<script src="README_files/header-attrs-2.13/header-attrs.js"></script>
+<script src="README_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="README_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="README_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="README_files/navigation-1.1/tabsets.js"></script>
+<link href="README_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="README_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="README_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="README_files/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="README_files/leaflet-1.3.1/leaflet.js"></script>
+<link href="README_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="README_files/proj4-2.6.2/proj4.min.js"></script>
+<script src="README_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="README_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="README_files/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="README_files/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="README_files/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<script src="README_files/Leaflet.glify-2.2.0/addGlifyPointsSrc.js"></script>
+<script src="README_files/Leaflet.glify-2.2.0/addGlifyPolygonsSrc.js"></script>
+<script src="README_files/Leaflet.glify-2.2.0/addGlifyPolylinesSrc.js"></script>
+<script src="README_files/Leaflet.glify-2.2.0/glify-browser.js"></script>
+<script src="README_files/glpolygons-plsdat-1/glpolygons-pls_data.js"></script>
+<script src="README_files/glpolygons-plscol-1/glpolygons-pls_color.js"></script>
+<script src="README_files/glpolygons-plspop-1/glpolygons-pls_popup.js"></script>
+<link href="README_files/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.css" rel="stylesheet" />
+<script src="README_files/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.js"></script>
+<link href="README_files/leaflet-easybutton-1.3.1/easy-button.css" rel="stylesheet" />
+<script src="README_files/leaflet-easybutton-1.3.1/easy-button.js"></script>
+<script src="README_files/leaflet-easybutton-1.3.1/EasyButton-binding.js"></script>
+<link href="README_files/ionicons-2.0.1/ionicons.min.css" rel="stylesheet" />
+<link href="README_files/lfx-gps-1.7.0/lfx-gps-prod.css" rel="stylesheet" />
+<script src="README_files/lfx-gps-1.7.0/lfx-gps-prod.js"></script>
+<script src="README_files/lfx-gps-1.7.0/lfx-gps-bindings.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="a-nationwide-community-deprivation-index" class="section level1">
+<h1>A Nationwide Community Deprivation Index</h1>
+<p><a href="http://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3" /></a></p>
+<p><strong>Citation for Scientific Publications:</strong> If you use the deprivation index in a scientific publication, please cite our manuscript detailing its creation and application to health outcomes:</p>
+<blockquote>
+<p>Cole Brokamp, Andrew F. Beck, Neera K. Goyal, Patrick Ryan, James M. Greenberg, Eric S. Hall. Material Community Deprivation and Hospital Utilization During the First Year of Life: An Urban Population-Based Cohort Study. <em>Annals of Epidemiology</em>. 30. 37-43. 2019. <a href="https://colebrokamp-website.s3.amazonaws.com/publications/Brokamp_AoE_2019.pdf">Download</a>.</p>
+</blockquote>
+<p><strong>2018 Update:</strong> The <a href="/2018_dep_index">2018_dep_index</a> folder contains an version of the same deprivation index, but updated with data from the 2018 5-yr American Community Survey data. See the <a href="/2018_dep_index/README.md">2018 README</a> for details on getting and using the data at the census tract and ZIP code level.</p>
+<hr />
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>Socioeconomic variables from the American Community Survey (ACS) are frequently used in place of or in addition to individual confounders in observational studies. There are several census tract level measures that can be used to capture “community deprivation” and they are often highly correlated, e.g., median household income and educational attainment. Choosing only one ACS measure might not capture the entirety of community deprivation, but using more than one ACS measure can lead to problems in statistical models due to colinearity.</p>
+<p>Here, we create a deprivation index for each census tract in the United States based on a principal components analysis of six different 2015 ACS measures. The first component explains over 60% of the total variance present in the five different ACS measures and is dubbed the “Deprivation Index”. Rescaling and normalizing forces the index to range from 0 to 1, with a higher index being more deprived.</p>
+<div id="htmlwidget-e2bef354913f5d7ed2cd" style="width:1152px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e2bef354913f5d7ed2cd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"fullscreenControl":{"position":"bottomleft","pseudoFullscreen":false}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addGlifyPolygonsSrc","args":[null,0.8,"glpolygons","glpolygons-pls"]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomright"}]},{"method":"addEasyButton","args":[{"icon":"ion-arrow-shrink","title":"Reset View","onClick":"function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }","position":"topleft"}]},{"method":"addControlGPS","args":[{"position":"topleft","activate":true,"autoCenter":true,"setView":true}]}],"limits":{"lat":[18.910361,71.365162],"lng":[-179.148909,179.77847]},"setView":[[38.0285,-93.65],5,[]]},"evals":["calls.3.args.0.onClick"],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+<p>The high resolution of the tract level is masked when using a nationwide scale. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:</p>
+<p><img src="figs/deprivation_index_map_cincinnati.jpeg" /></p>
+</div>
+<div id="getting-the-data" class="section level2">
+<h2>Getting the data</h2>
+<div id="download-the-csv-file" class="section level3">
+<h3>Download the CSV file</h3>
+<p>The data is contained in a CSV file called <a href="https://github.com/geomarker-io/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.csv">ACS_deprivation_index_by_census_tracts.csv</a> which is a table of 73,056 census tracts listed by their FIPS ID and corresponding deprivation index. Also included for each tract are the six individual ACS measures used to create the deprivation index.</p>
+</div>
+<div id="import-directly-into-r" class="section level3">
+<h3>Import Directly Into <code>R</code></h3>
+<p>Use the following code to download the deprivation index data.frame directly into R:</p>
+<pre><code>dep_index &lt;- &#39;https://github.com/geomarker-io/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds&#39; %&gt;% 
+    url() %&gt;% 
+    gzcon() %&gt;% 
+    readRDS() %&gt;% 
+    as_tibble()</code></pre>
+</div>
+<div id="zip-code-deprivation-index" class="section level3">
+<h3>ZIP Code Deprivation Index</h3>
+<p>The deprivation index is also available by zip codes, denoted using the <a href="https://en.wikipedia.org/wiki/ZIP_Code_Tabulation_Area">ZIP Code Tabulation Area (ZCTA)</a> boundaries. The value for each ZCTA is calculated as the mean of all of its intersecting census tracts. Download the file called <code>ACS_deprivation_index_by_zipcode.csv</code> or use the above code to read it into R by replacing the RDS file name with <code>ACS_deprivation_index_by_zipcode.rds</code>.</p>
+</div>
+</div>
+<div id="details-on-creating-the-index" class="section level2">
+<h2>Details on Creating the Index</h2>
+<p>The following census tract level variables were derived from the 2015 5-year American Community Survey:</p>
+<ul>
+<li><code>fraction_poverty</code>: fraction of population with income in past 12 months below poverty level</li>
+<li><code>median_income</code>: median household income in the past 12 months in 2015 inflation-adjusted dollars</li>
+<li><code>fraction_high_school_edu</code>: fraction of population 25 and older with educational attainment of at least high school graduation (includes GED equivalency)</li>
+<li><code>fraction_no_health_ins</code>: fraction of poulation with no health insurance coverage</li>
+<li><code>acs_assisted_income</code>: fraction of households receiving public assistance income or food stamps or SNAP in the past 12 months</li>
+<li><code>fraction_vacant_housing</code>: fraction of houses that are vacant</li>
+</ul>
+<p>Looking at a pairs plot of all the ACS estimates, we can see that they are mostly highly correlated with one another:</p>
+<p><img src="figs/acs_data_pairs_plot.jpg" /></p>
+<p>Carrying out a principal component analysis results in six components, with the first explaining over 70% of the total variance in the six ACS measures:</p>
+<p><img src="figs/variance_of_acs_explained_by_dep_index.jpg" /></p>
+<p>Looking at the loading weights used to calculate the principal components, we can see that (other than the fraction of vacant housing) the first component is somewhat equally weighted by each ACS measure, each in the expected direction such that a higher first component value is associated with higher deprivation.</p>
+<p>The first component is dubbed the “Deprivation Index”; rescaling and normalizing forces the index to range from 0 to 1, with a higher index being more deprived.</p>
+<p><img src="figs/acs_measure_weights_on_dep_index.jpg" /></p>
+<p>Applying the weights to the data for all census tracts leads to a deprivation index assignment for US census tracts with non-missing ACS measures. 999 of the 73,056 total US census tracts have a missing value for the deprivation index because of a missing value for one or more of the underlying ACS measures.</p>
+<p><img src="figs/dep_index_density.jpg" /></p>
+<p>We calculated the nationwide mean (0.37) and standard error (0.0006) for the deprivation index by weighting each tract-level deprivation index by its population under age 18. Details are in the <a href="weighted_avg/dep_index_pop_under_18_weighted_avg.R">weighted_avg/dep_index_pop_under_18_weighted_avg.R</a> file.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Measure</th>
+<th align="right">2015 Deprivation Index</th>
+<th align="right">2018 Deprivation Index</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mean</td>
+<td align="right">0.37</td>
+<td align="right">0.35</td>
+</tr>
+<tr class="even">
+<td align="left">Standard Error</td>
+<td align="right">0.0006</td>
+<td align="right">0.0006</td>
+</tr>
+<tr class="odd">
+<td align="left">25th percentile</td>
+<td align="right">0.27</td>
+<td align="right">0.25</td>
+</tr>
+<tr class="even">
+<td align="left">Median</td>
+<td align="right">0.36</td>
+<td align="right">0.33</td>
+</tr>
+<tr class="odd">
+<td align="left">75th percentile</td>
+<td align="right">0.46</td>
+<td align="right">0.43</td>
+</tr>
+</tbody>
+</table>
+<p>We can verify the relationship between the deprivation index and each of the ACS measures individually with scatter plots:</p>
+<p><img src="figs/dep_index_and_acs_measures_xyplots.jpg" /></p>
+</div>
+<div id="reproducibility" class="section level2">
+<h2>Reproducibility</h2>
+<p><code>01_make_data_for_dep_index.R</code> is used to fetch the ACS census tract level data and then <code>02_pca_on_dep_index_data.R</code> is used to carry out the principal components analysis, create the deprivation index, and create the images used in this document. <code>03_calculate_dep_index_by_ZCTA.R</code> calculates each measurement and deprivation index for each ZIP code.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
