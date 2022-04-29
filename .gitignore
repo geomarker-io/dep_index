@@ -2,3 +2,4 @@
 data_for_dep_index.rds
 .Rproj.user
 .DS_Store
+/s3_downloads/
