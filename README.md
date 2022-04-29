@@ -8,6 +8,8 @@
 
 **2018 Update:**  The [2018_dep_index](/2018_dep_index) folder contains an version of the same deprivation index, but updated with data from the 2018 5-yr American Community Survey data.  See the [2018 README](/2018_dep_index/README.md) for details on getting and using the data at the census tract and ZIP code level.
 
+See a nationwide, interactive map of the 2018 deprivation index [here](interactive_map_2018_dep_index.html)
+
 --------------------------------------------
 
 ## Overview

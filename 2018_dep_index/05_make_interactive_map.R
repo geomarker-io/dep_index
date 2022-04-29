@@ -18,6 +18,9 @@ d <-
 d$dep_index <- round(d$dep_index, digits = 2)
 d <- na.omit(d)
 
+d <- d |>
+  dplyr::filter(dep_index > 0.4)
+
 national_map <- leaflet() |>
   addProviderTiles(provider = providers$CartoDB.Positron) |>
   addGlPolygons(
