@@ -8,8 +8,6 @@
 
 **2018 Update:**  The [2018_dep_index](/2018_dep_index) folder contains an version of the same deprivation index, but updated with data from the 2018 5-yr American Community Survey data.  See the [2018 README](/2018_dep_index/README.md) for details on getting and using the data at the census tract and ZIP code level.
 
-See a nationwide, interactive map of the 2018 deprivation index [here](http://dep-index.s3-website.us-east-2.amazonaws.com/)
-
 --------------------------------------------
 
 ## Overview
@@ -20,7 +18,7 @@ Here, we create a deprivation index for each census tract in the United States b
 
 [![](figs/dep_index_nationwide_map.jpeg)](http://dep-index.s3-website.us-east-2.amazonaws.com/)
 
-The high resolution of the tract level is masked when using a nationwide scale. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:
+The high resolution of the tract level is masked when using a nationwide scale. Click one of the maps or visit [http://dep-index.s3-website.us-east-2.amazonaws.com/](http://dep-index.s3-website.us-east-2.amazonaws.com/) to view an interactive, nationwide map online. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:
 
 [![](figs/deprivation_index_map_cincinnati.jpeg)](http://dep-index.s3-website.us-east-2.amazonaws.com/)
 
