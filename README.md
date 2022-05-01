@@ -8,7 +8,7 @@
 
 **2018 Update:**  The [2018_dep_index](/2018_dep_index) folder contains an version of the same deprivation index, but updated with data from the 2018 5-yr American Community Survey data.  See the [2018 README](/2018_dep_index/README.md) for details on getting and using the data at the census tract and ZIP code level.
 
-See a nationwide, interactive map of the 2018 deprivation index [here](interactive_map_2018_dep_index.html)
+See a nationwide, interactive map of the 2018 deprivation index [here](http://dep-index.s3-website.us-east-2.amazonaws.com/)
 
 --------------------------------------------
 
@@ -18,11 +18,11 @@ Socioeconomic variables from the American Community Survey (ACS) are frequently 
 
 Here, we create a deprivation index for each census tract in the United States based on a principal components analysis of six different 2015 ACS measures. The first component explains over 60% of the total variance present in the five different ACS measures and is dubbed the "Deprivation Index". Rescaling and normalizing forces the index to range from 0 to 1, with a higher index being more deprived.
 
-![](figs/dep_index_nationwide_map.jpeg)
+[![](figs/dep_index_nationwide_map.jpeg)](http://dep-index.s3-website.us-east-2.amazonaws.com/)
 
 The high resolution of the tract level is masked when using a nationwide scale. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:
 
-![](figs/deprivation_index_map_cincinnati.jpeg)
+[![](figs/deprivation_index_map_cincinnati.jpeg)](http://dep-index.s3-website.us-east-2.amazonaws.com/)
 
 ## Getting the data
 
