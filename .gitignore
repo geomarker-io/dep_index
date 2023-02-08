@@ -1,6 +1,0 @@
-*.pdf
-data_for_dep_index.rds
-.Rproj.user
-.DS_Store
-/s3_downloads/
-interactive_map_2018_dep_index.html
