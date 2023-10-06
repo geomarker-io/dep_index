@@ -79,6 +79,7 @@ We calculated the nationwide mean (0.37) and standard error (0.0006) for the dep
 | :--------       | -----: | -----------: |
 | Mean            | 0.37   |  0.35   |
 | Standard Error  | 0.0006 |  0.0006 |
+| Standard Deviation  | 0.13 |  0.13 |
 | 25th percentile | 0.27   |  0.25   |
 | Median          | 0.36   |  0.33   |
 | 75th percentile | 0.46   |  0.43   |
