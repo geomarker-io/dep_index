@@ -16,11 +16,11 @@ Socioeconomic variables from the American Community Survey (ACS) are frequently 
 
 Here, we create a deprivation index for each census tract in the United States based on a principal components analysis of six different 2015 ACS measures. The first component explains over 60% of the total variance present in the five different ACS measures and is dubbed the "Deprivation Index". Rescaling and normalizing forces the index to range from 0 to 1, with a higher index being more deprived.
 
-[![](figs/dep_index_nationwide_map.jpeg)](http://dep-index.s3-website.us-east-2.amazonaws.com/)
+![](figs/dep_index_nationwide_map.jpeg)
 
-The high resolution of the tract level is masked when using a nationwide scale. Click one of the maps or visit [http://dep-index.s3-website.us-east-2.amazonaws.com/](http://dep-index.s3-website.us-east-2.amazonaws.com/) to view an interactive, nationwide map online. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:
+The high resolution of the tract level is masked when using a nationwide scale. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:
 
-[![](figs/deprivation_index_map_cincinnati.jpeg)](http://dep-index.s3-website.us-east-2.amazonaws.com/)
+![](figs/deprivation_index_map_cincinnati.jpeg)
 
 ## Getting the data
 
