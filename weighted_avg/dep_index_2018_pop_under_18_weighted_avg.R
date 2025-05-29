@@ -23,8 +23,16 @@ dep_index <- dep_index %>%
   left_join(tract_pop_under_18, by = c('census_tract_fips' = 'GEOID'))
 
 ## base method 
-weighted.mean(x = dep_index$dep_index, w = dep_index$pop_under_18, na.rm = TRUE)
+wt_mean <- weighted.mean(x = dep_index$dep_index, w = dep_index$pop_under_18, na.rm = TRUE)
+wt_mean
 ## about 1000 tracts are missing deprivation index
+
+# weighted_variance
+dev_sq <- (dep_index$dep_index - wt_mean)^2
+wt_var <- weighted.mean(x = dev_sq, w = dep_index$pop_under_18, na.rm = TRUE)
+
+# weighted sd
+wt_sd <- sqrt(wt_var)
 
 ## manual
 t <- dep_index %>% 
