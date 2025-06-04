@@ -6,39 +6,39 @@
 
 > Cole Brokamp, Andrew F. Beck, Neera K. Goyal, Patrick Ryan, James M. Greenberg, Eric S. Hall. Material Community Deprivation and Hospital Utilization During the First Year of Life: An Urban Population-Based Cohort Study. *Annals of Epidemiology*. 30. 37-43. 2019. [Download](https://colebrokamp-website.s3.amazonaws.com/publications/Brokamp_AoE_2019.pdf).
 
-**2018 Update:**  The [2018_dep_index](/2018_dep_index) folder contains an version of the same deprivation index, but updated with data from the 2018 5-yr American Community Survey data.  See the [2018 README](/2018_dep_index/README.md) for details on getting and using the data at the census tract and ZIP code level.
-
 --------------------------------------------
 
 ## Overview
 
 Socioeconomic variables from the American Community Survey (ACS) are frequently used in place of or in addition to individual confounders in observational studies. There are several census tract level measures that can be used to capture "community deprivation" and they are often highly correlated, e.g., median household income and educational attainment. Choosing only one ACS measure might not capture the entirety of community deprivation, but using more than one ACS measure can lead to problems in statistical models due to colinearity. 
 
-Here, we create a deprivation index for each census tract in the United States based on a principal components analysis of six different 2015 ACS measures. The first component explains over 60% of the total variance present in the five different ACS measures and is dubbed the "Deprivation Index". Rescaling and normalizing forces the index to range from 0 to 1, with a higher index being more deprived.
+We've created a 2015, 2018, and 2023 deprivation index for each census tract in the United States based on a principal components analysis of six different measures from the 2015, 2018, and 2023 ACS, respectively. The first component explains over 52% to 60% of the total variance present in the six different ACS measures and is dubbed the "Deprivation Index". Rescaling and normalizing forces the index to range from 0 to 1, with a higher index being more deprived.
 
-![](figs/dep_index_nationwide_map.jpeg)
+![](2015/figs/dep_index_nationwide_map.jpeg)
 
 The high resolution of the tract level is masked when using a nationwide scale. Below is an example of how the index looks across the Greater Cincinnati, Ohio area:
 
-![](figs/deprivation_index_map_cincinnati.jpeg)
+![](2015/figs/deprivation_index_map_cincinnati.jpeg)
 
 ## Getting the data
 
 ### Download the CSV file
 
-The data is contained in a CSV file called [ACS_deprivation_index_by_census_tracts.csv](https://github.com/geomarker-io/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.csv) which is a table of 73,056 census tracts listed by their FIPS ID and corresponding deprivation index.  Also included for each tract are the six individual ACS measures used to create the deprivation index.
+The data is contained in CSV files called [ACS_deprivation_index_by_census_tracts.csv](https://github.com/geomarker-io/dep_index/raw/master/2023/dataACS_deprivation_index_by_census_tracts.csv) stored in the `data/` folder within the directory for the corresponding deprivation index vintage (2015, 2018, or 2023). The data is a table of all census tracts listed by their FIPS ID, deprivation index, and the six individual ACS measures used to create the deprivation index.
 
 ### Import Directly Into `R`
 
-Use the following code to download the deprivation index data.frame directly into R:
+Use the following code to read the 2023 deprivation index data.frame directly into R:
 
 ```
-dep_index <- 'https://github.com/geomarker-io/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds' %>% 
+dep_index <- 'https://github.com/geomarker-io/dep_index/raw/master/2023/data/ACS_deprivation_index_by_census_tracts.rds' %>% 
     url() %>% 
     gzcon() %>% 
     readRDS() %>% 
     as_tibble()
 ```
+
+Alternatively, change the year in the url above to read in the 2015 or 2018 deprivation index.
 
 ### ZIP Code Deprivation Index
 
@@ -46,49 +46,49 @@ The deprivation index is also available by zip codes, denoted using the [ZIP Cod
 
 ## Details on Creating the Index
 
-The following census tract level variables were derived from the 2015 5-year American Community Survey:
+The following census tract level variables were derived from the 2023 5-year American Community Survey:
 
-- `fraction_poverty`: fraction of population with income in past 12 months below poverty level
-- `median_income`: median household income in the past 12 months in 2015 inflation-adjusted dollars
-- `fraction_high_school_edu`: fraction of population 25 and older with educational attainment of at least high school graduation (includes GED equivalency)
-- `fraction_no_health_ins`: fraction of poulation with no health insurance coverage
-- `acs_assisted_income`: fraction of households receiving public assistance income or food stamps or SNAP in the past 12 months
-- `fraction_vacant_housing`: fraction of houses that are vacant
+- `fraction_poverty`: fraction of households with income below poverty level within the past 12 months
+- `median_income`: median household income in the past 12 months in 2023 inflation-adjusted dollars
+- `fraction_hs`: fraction of population 25 and older with educational attainment of at least high school graduation (includes GED equivalency)
+- `fraction_insured`: fraction of population with health insurance
+- `fraction_snap`: fraction of households receiving public assistance income or food stamps/SNAP in the past 12 months
+- `fraction_vacant`: fraction of houses that are vacant
 
 Looking at a pairs plot of all the ACS estimates, we can see that they are mostly highly correlated with one another:
 
-![](figs/acs_data_pairs_plot.jpg)
+![](2023/figs/acs_data_pairs_plot.jpg)
 
-Carrying out a principal component analysis results in six components, with the first explaining over 70% of the total variance in the six ACS measures:
+Carrying out a principal component analysis results in six components, with the first explaining over 50% of the total variance in the six ACS measures:
 
-![](figs/variance_of_acs_explained_by_dep_index.jpg)
+![](2023/figs/variance_of_acs_explained_by_dep_index.jpg)
 
 Looking at the loading weights used to calculate the principal components, we can see that (other than the fraction of vacant housing) the first component is somewhat equally weighted by each ACS measure, each in the expected direction such that a higher first component value is associated with higher deprivation.
 
 The first component is dubbed the "Deprivation Index"; rescaling and normalizing forces the index to range from 0 to 1, with a higher index being more deprived.
 
-![](figs/acs_measure_weights_on_dep_index.jpg)
+![](2023/figs/acs_measure_weights_on_dep_index.jpg)
 
-Applying the weights to the data for all census tracts leads to a deprivation index assignment for US census tracts with non-missing ACS measures.  999 of the 73,056 total US census tracts have a missing value for the deprivation index because of a missing value for one or more of the underlying ACS measures.
+Applying the weights to the data for all census tracts leads to a deprivation index assignment for US census tracts with non-missing ACS measures. 2,075 of the 84,122 total 2020 US census tracts have a missing value for the deprivation index because of a missing value for one or more of the underlying ACS measures.
 
-![](figs/dep_index_density.jpg)
-
-We calculated the nationwide mean (0.37) and standard error (0.0006) for the deprivation index by weighting each tract-level deprivation index by its population under age 18. Details are in the [weighted_avg/dep_index_pop_under_18_weighted_avg.R](weighted_avg/dep_index_pop_under_18_weighted_avg.R) file.
-
-| Measure         | 2015 Deprivation Index     | 2018 Deprivation Index   |
-| :--------       | -----: | -----------: |
-| Mean            | 0.37   |  0.35   |
-| Standard Error  | 0.0006 |  0.0006 |
-| Standard Deviation  | 0.13 |  0.13 |
-| 25th percentile | 0.27   |  0.25   |
-| Median          | 0.36   |  0.33   |
-| 75th percentile | 0.46   |  0.43   |
-
+![](2023/figs/dep_index_density.jpg)
 
 We can verify the relationship between the deprivation index and each of the ACS measures individually with scatter plots:
 
-![](figs/dep_index_and_acs_measures_xyplots.jpg)
+![](2023/figs/dep_index_and_acs_measures_xyplots.jpg)
 
-## Reproducibility
+## Deprivation Index Vintages
 
-`01_make_data_for_dep_index.R` is used to fetch the ACS census tract level data and then `02_pca_on_dep_index_data.R` is used to carry out the principal components analysis, create the deprivation index, and create the images used in this document. `03_calculate_dep_index_by_ZCTA.R` calculates each measurement and deprivation index for each ZIP code.
+The first deprivation index was calculated using 2015 ACS data. The same methods were used to create 2018 and 2023 deprivation index vintages. The above plots for each vintage can be found in the `figs/` folder of each vintage directory.
+
+The 2015 and 2018 deprivation indices use 2010 census tract boundaries, while the 2023 deprivation index was calculated using 2020 census tract boundaries.
+
+Deprivation index values should not be compared across different vintages, as the values are rescaled within each vintage. Rather, the deprivation index is meant to compare census tracts within the same vintage.
+
+We calculated the nationwide summary statistics for the deprivation index by weighting each tract-level deprivation index by its population under age 18. Details are in the [weighted_avg/dep_index_pop_under_18_weighted_avg.R](weighted_avg/dep_index_pop_under_18_weighted_avg.R) file.
+
+|year | mean|   sd|  p25| median|  p75| 
+|:----|----:|----:|----:|------:|----:| 
+|2015 | 0.38| 0.14| 0.27|   0.36| 0.47| 
+|2018 | 0.35| 0.14| 0.25|   0.33| 0.44| 
+|2023 | 0.30| 0.14| 0.20|   0.28| 0.38|
