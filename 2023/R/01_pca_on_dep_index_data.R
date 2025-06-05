@@ -1,5 +1,6 @@
 library(tidyverse)
 library(dpkg)
+ggplot2::theme_set(theme_bw())
 
 d <- dpkg::stow(
     "https://github.com/geomarker-io/hh_acs_measures/releases/download/hh_acs_measures-v1.3.0/hh_acs_measures-v1.3.0.parquet"
@@ -27,7 +28,6 @@ d |>
     select(-census_tract_id_2020) |>
     ggpairs(lower = list(continuous = wrap('points', alpha = 0.1)))
 ggsave('2023/figs/acs_data_pairs_plot.jpg', width = 12, height = 12)
-
 
 # Hamilton county only
 # d |>
