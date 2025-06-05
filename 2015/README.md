@@ -35,6 +35,8 @@ The following census tract level variables were derived from the 2015 5-year Ame
 - `fraction_assisted_income`: fraction of households receiving public assistance income or food stamps or SNAP in the past 12 months
 - `fraction_vacant_housing`: fraction of houses that are vacant
 
+999 of the 73,056 total 2010 US census tracts have a missing value for the deprivation index because of a missing value for one or more of the underlying ACS measures.
+
 ## PCA results for 2015 ACS data
 
 ### Pairs plot of ACS estimates

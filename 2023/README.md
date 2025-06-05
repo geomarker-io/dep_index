@@ -35,6 +35,8 @@ The following census tract level variables were derived from the 2023 5-year Ame
 - `fraction_snap`: fraction of households receiving public assistance income or food stamps/SNAP in the past 12 months
 - `fraction_vacant`: fraction of houses that are vacant
 
+2,075 of the 84,122 total 2020 US census tracts have a missing value for the deprivation index because of a missing value for one or more of the underlying ACS measures.
+
 ## PCA results for 2023 ACS data
 
 ### Pairs plot of ACS estimates
