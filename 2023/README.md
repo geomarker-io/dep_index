@@ -1,4 +1,4 @@
-# A Nationwide Community Deprivation Index
+# 2023 Deprivation Index
 
 Please see the main [README](../README.md) for methodological details. 
 

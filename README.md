@@ -22,11 +22,11 @@ The high resolution of the tract level is masked when using a nationwide scale. 
 
 ## Getting the data
 
-### Download the CSV file
+### Download the 2023 Deprivation Index CSV file
 
 The data is contained in CSV files called [ACS_deprivation_index_by_census_tracts.csv](https://github.com/geomarker-io/dep_index/raw/master/2023/dataACS_deprivation_index_by_census_tracts.csv) stored in the `data/` folder within the directory for the corresponding deprivation index vintage (2015, 2018, or 2023). The data is a table of all census tracts listed by their FIPS ID, deprivation index, and the six individual ACS measures used to create the deprivation index.
 
-### Import Directly Into `R`
+### Import the 2023 Deprivation Index Directly Into `R`
 
 Use the following code to read the 2023 deprivation index data.frame directly into R:
 
