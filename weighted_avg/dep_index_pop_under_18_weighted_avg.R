@@ -1,57 +1,61 @@
 suppressPackageStartupMessages(library(tidyverse))
 
-states <- tigris::states(cb = TRUE) %>%
-  select(NAME) %>%
-  sf::st_drop_geometry() %>%
-  filter(! NAME %in% c('Guam', 'Commonwealth of the Northern Mariana Islands',
-                       'United States Virgin Islands', 'American Samoa', 'Puerto Rico'))
+year <- c("2015", "2018", "2023")
+dep_urls <- glue::glue("{year}/data/ACS_deprivation_index_by_census_tracts.rds")
+dep_index <- purrr::map(dep_urls, \(x) readRDS(x) |> ungroup())
+names(dep_index) <- year
+dep_index <- purrr::map(dep_index, \(x) rename(x, census_tract_id = 1))
+dep_index <- purrr::map(dep_index, \(x) select(x, census_tract_id, dep_index))
+dep_index <- bind_rows(dep_index, .id = "year")
 
-tract_pop_under_18 <- tidycensus::get_acs(geography = 'tract',
-                                          variables = c(paste0('B01001_00', 1:6), paste0('B01001_0', 27:30)),
-                                          state = states$NAME,
-                                          year = 2015) %>%
-  group_by(GEOID) %>%
-  summarize(pop_under_18 = sum(estimate))
+n_children <- dpkg::stow(
+  "https://github.com/geomarker-io/hh_acs_measures/releases/download/hh_acs_measures-v1.3.0/hh_acs_measures-v1.3.0.parquet"
+) |>
+  dpkg::read_dpkg() |>
+  filter(
+    census_tract_vintage == "2010" &
+      year %in% c("2015", "2018") |
+      census_tract_vintage == "2020" & year %in% c("2023")
+  ) |>
+  select(census_tract_id, year, n_children_lt18) |>
+  mutate(year = as.character(year))
 
-dep_index <- 'https://github.com/cole-brokamp/dep_index/raw/master/ACS_deprivation_index_by_census_tracts.rds' %>%
-  url() %>%
-  gzcon() %>%
-  readRDS() %>%
-  as_tibble()
+dep_index <-
+  dep_index |>
+  left_join(n_children, by = c("census_tract_id", "year")) |>
+  na.omit() |>
+  group_by(year) |>
+  nest()
 
-dep_index <- dep_index %>%
-  left_join(tract_pop_under_18, by = c('census_tract_fips' = 'GEOID'))
-
-## base method 
-wt_mean <- weighted.mean(x = dep_index$dep_index, w = dep_index$pop_under_18, na.rm = TRUE)
-wt_mean
-## about 1000 tracts are missing deprivation index
-
-# weighted_variance
-dev_sq <- (dep_index$dep_index - wt_mean)^2
-wt_var <- weighted.mean(x = dev_sq, w = dep_index$pop_under_18, na.rm = TRUE)
-
-# weighted sd
-wt_sd <- sqrt(wt_var)
-
-## manual
-t <- dep_index %>% 
-  select(census_tract_fips, dep_index, pop_under_18) %>% 
-  mutate(wt_dep = dep_index * pop_under_18) %>% 
-  filter(!is.na(dep_index), !is.na(pop_under_18))
-
-sum(t$wt_dep) / sum(t$pop_under_18)
-
-## diagis pkg
-diagis::weighted_mean(x = dep_index$dep_index, w = dep_index$pop_under_18, na.rm = TRUE)
-diagis::weighted_se(x = dep_index$dep_index, w = dep_index$pop_under_18, na.rm = TRUE)
-
-## quantiles
-library(spatstat)
-weighted.median(x = dep_index$dep_index, w = dep_index$pop_under_18, na.rm = TRUE)
-weighted.quantile(x = dep_index$dep_index, w = dep_index$pop_under_18, 
-                  probs = c(0.25, 0.50, 0.75), na.rm = TRUE)
-
-  
-  
-  
+dep_index |>
+  mutate(
+    mean = purrr::map_dbl(
+      data,
+      \(d) weighted.mean(x = d$dep_index, w = d$n_children_lt18)
+    ),
+    variance = purrr::map_dbl(
+      data,
+      \(d) weighted.mean(x = (d$dep_index - mean)^2, w = d$n_children_lt18)
+    ),
+    sd = sqrt(variance),
+    se = purrr::map_dbl(
+      data,
+      \(d) diagis::weighted_se(x = d$dep_index, w = d$n_children_lt18)
+    ),
+    wt_quantile = purrr::map(
+      data,
+      \(d)
+        ggstats::weighted.quantile(
+          x = d$dep_index,
+          w = d$n_children_lt18,
+          probs = c(0.25, 0.5, 0.75)
+        )
+    ),
+    p25 = purrr::map_dbl(wt_quantile, \(q) q[1]),
+    median = purrr::map_dbl(wt_quantile, \(q) q[2]),
+    p75 = purrr::map_dbl(wt_quantile, \(q) q[3])
+  ) |>
+  select(year, mean, se, sd, p25, median, p75) |>
+  mutate(across(where(is.numeric), \(x) round(x, 2))) |>
+  knitr::kable() |>
+  cat(file = "weighted_avg/table.md", append = FALSE)
